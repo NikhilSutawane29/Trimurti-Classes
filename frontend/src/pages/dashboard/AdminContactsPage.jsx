@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Search, Calendar, Phone, Mail as MailIcon } from 'lucide-react';
+import { ArrowLeft, Search, Calendar, Phone, Mail as MailIcon, Trash2 } from 'lucide-react';
 import { adminApi } from '../../utils/api';
 
 const AdminContactsPage = () => {
@@ -21,6 +21,22 @@ const AdminContactsPage = () => {
       console.error('Error fetching contacts:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this contact submission? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await adminApi.deleteContact(id);
+      // Remove from state immediately
+      setContacts(contacts.filter(contact => contact._id !== id));
+      alert('Contact submission deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting contact:', error);
+      alert('Failed to delete contact submission. Please try again.');
     }
   };
 
@@ -103,12 +119,15 @@ const AdminContactsPage = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Date
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {loading ? (
                   <tr>
-                    <td colSpan="5" className="px-6 py-12 text-center">
+                    <td colSpan="6" className="px-6 py-12 text-center">
                       <div className="flex justify-center">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
                       </div>
@@ -116,19 +135,19 @@ const AdminContactsPage = () => {
                   </tr>
                 ) : filteredContacts.length === 0 ? (
                   <tr>
-                    <td colSpan="5" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                    <td colSpan="6" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                       No contact submissions found
                     </td>
                   </tr>
                 ) : (
                   filteredContacts.map((contact) => (
                     <tr key={contact._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-3 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
                           {contact.name}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-3 whitespace-nowrap">
                         <div className="flex flex-col gap-1">
                           <div className="flex items-center gap-1 text-sm text-gray-900 dark:text-white">
                             <Phone size={14} />
@@ -140,17 +159,29 @@ const AdminContactsPage = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         {contact.subject}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-md truncate">
-                        {contact.message}
+                      <td className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                        <div className="max-w-xs truncate" title={contact.message}>
+                          {contact.message}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center gap-1">
                           <Calendar size={14} />
                           {formatDate(contact.createdAt)}
                         </div>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm">
+                        <button
+                          onClick={() => handleDelete(contact._id)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors duration-200"
+                          title="Delete contact submission"
+                        >
+                          <Trash2 size={16} />
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))

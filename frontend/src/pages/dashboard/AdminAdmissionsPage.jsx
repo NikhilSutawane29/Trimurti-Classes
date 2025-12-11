@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Search, Calendar } from 'lucide-react';
+import { ArrowLeft, Search, Calendar, Trash2 } from 'lucide-react';
 import { adminApi } from '../../utils/api';
 
 const AdminAdmissionsPage = () => { 
@@ -21,6 +21,22 @@ const AdminAdmissionsPage = () => {
       console.error('Error fetching admissions:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this admission submission? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      await adminApi.deleteAdmission(id);
+      // Remove from state immediately
+      setAdmissions(admissions.filter(admission => admission._id !== id));
+      alert('Admission submission deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting admission:', error);
+      alert('Failed to delete admission submission. Please try again.');
     }
   };
 
@@ -88,16 +104,16 @@ const AdminAdmissionsPage = () => {
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    Name
+                    Student Info
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    Phone
+                    Contact
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    Standard
+                    Class & Medium
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                    Medium
+                    Subject
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Message
@@ -105,12 +121,15 @@ const AdminAdmissionsPage = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                     Date
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 {loading ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-12 text-center">
+                    <td colSpan="7" className="px-6 py-12 text-center">
                       <div className="flex justify-center">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
                       </div>
@@ -118,40 +137,69 @@ const AdminAdmissionsPage = () => {
                   </tr>
                 ) : filteredAdmissions.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                    <td colSpan="7" className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                       No admissions found
                     </td>
                   </tr>
                 ) : (
                   filteredAdmissions.map((admission) => (
                     <tr key={admission._id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-3 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {admission.name}
+                          {admission.fullName || admission.name}
                         </div>
-                        {admission.email && (
-                          <div className="text-sm text-gray-500 dark:text-gray-400">
-                            {admission.email}
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="flex flex-col gap-1">
+                          {admission.email && (
+                            <div className="text-sm text-gray-900 dark:text-white">
+                              📧 {admission.email}
+                            </div>
+                          )}
+                          {admission.phone && (
+                            <div className="text-sm text-gray-900 dark:text-white">
+                              📱 {admission.phone}
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="flex flex-col gap-1">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                            {admission.interested?.standard || admission.standard || '-'}
                           </div>
-                        )}
+                          {(admission.interested?.medium || admission.medium) && (
+                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                              {admission.interested?.medium || admission.medium}
+                            </div>
+                          )}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                        {admission.phone}
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 dark:text-white">
+                          {admission.subject || '-'}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                        {admission.standard}
+                      <td className="px-4 py-3">
+                        <div className="text-sm text-gray-600 dark:text-gray-400 max-w-xs truncate" title={admission.message}>
+                          {admission.message || '-'}
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                        {admission.medium}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-900 dark:text-white max-w-xs truncate">
-                        {admission.message || '-'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center gap-1">
                           <Calendar size={14} />
                           {formatDate(admission.createdAt)}
                         </div>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm">
+                        <button
+                          onClick={() => handleDelete(admission._id)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors duration-200"
+                          title="Delete admission submission"
+                        >
+                          <Trash2 size={16} />
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))

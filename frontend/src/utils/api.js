@@ -406,21 +406,28 @@ export const adminApi = {
    * @param {object} params - Query parameters
    * @returns {Promise} - API response
    */
-  getAdmissions: (params = {}) => apiService.get('/admin/admissions', params),
+  getAdmissions: (params = {}) => apiService.get('/admissions', params),
+
+  /**
+   * Delete an admission inquiry
+   * @param {string} admissionId - Admission ID
+   * @returns {Promise} - API response
+   */
+  deleteAdmission: (admissionId) => apiService.delete(`/admissions/${admissionId}`),
 
   /**
    * Get all contacts
    * @param {object} params - Query parameters
    * @returns {Promise} - API response
    */
-  getContacts: (params = {}) => apiService.get('/admin/contacts', params),
+  getContacts: (params = {}) => apiService.get('/contact', params),
 
   /**
    * Get a single contact
    * @param {string} contactId - Contact ID
    * @returns {Promise} - API response
    */
-  getContact: (contactId) => apiService.get(`/admin/contacts/${contactId}`),
+  getContact: (contactId) => apiService.get(`/contact/${contactId}`),
 
   /**
    * Update contact status
@@ -428,14 +435,14 @@ export const adminApi = {
    * @param {object} data - Update data
    * @returns {Promise} - API response
    */
-  updateContact: (contactId, data) => apiService.put(`/admin/contacts/${contactId}`, data),
+  updateContact: (contactId, data) => apiService.put(`/contact/${contactId}`, data),
 
   /**
    * Delete a contact
    * @param {string} contactId - Contact ID
    * @returns {Promise} - API response
    */
-  deleteContact: (contactId) => apiService.delete(`/admin/contacts/${contactId}`),
+  deleteContact: (contactId) => apiService.delete(`/contact/${contactId}`),
 };
 
 // Upload-specific API methods
