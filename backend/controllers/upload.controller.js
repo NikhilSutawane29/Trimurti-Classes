@@ -17,12 +17,19 @@ exports.uploadImageToCloudinary = async (req, res, next) => {
       return next(new ErrorResponse('Please upload an image file', 400));
     }
 
-    // Check file size (10MB limit)
-    const maxSize = 10 * 1024 * 1024;
+    // Check file size (15MB limit for high-quality photos)
+    const maxSize = 15 * 1024 * 1024;
     if (req.file.size > maxSize) {
       // Clean up the file that was too large
       await unlinkAsync(req.file.path);
-      return next(new ErrorResponse('Image size should be less than 10MB', 400));
+      return next(new ErrorResponse('Image size should be less than 15MB', 400));
+    }
+
+    // Validate image type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(req.file.mimetype)) {
+      await unlinkAsync(req.file.path);
+      return next(new ErrorResponse('Please upload only JPEG, PNG, or WebP images', 400));
     }
 
     // Upload to cloudinary

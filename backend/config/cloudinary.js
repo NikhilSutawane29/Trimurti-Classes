@@ -25,7 +25,15 @@ const uploadImage = async (imagePath, folder = 'trimurti-classes') => {
       unique_filename: true,
       overwrite: true,
       folder: folder,
-      resource_type: "auto"
+      resource_type: "auto",
+      // Optimize images automatically
+      quality: "auto:good", // Automatic quality optimization
+      fetch_format: "auto", // Automatic format selection (WebP for modern browsers)
+      flags: "progressive", // Progressive JPEG loading
+      // Limit maximum dimensions to reduce file size
+      transformation: [
+        { width: 2000, height: 2000, crop: "limit" } // Max 2000px on longest side
+      ]
     };
 
     // Upload the image

@@ -219,9 +219,9 @@ const Layout = () => {
                 Batch Timings
               </h3>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-                <li>Morning Batch: 8 AM to 11 AM</li>
-                <li>Afternoon Batch: 4 PM to 8 PM</li>
-                <li>Weekend Special: 9 AM to 12 PM</li>
+                <li>Morning Batch: 7 AM to 11 AM</li>
+                <li>Afternoon Batch: 3 PM to 8 PM</li>
+                <li>Weekend Special: 8 AM to 12 PM</li>
               </ul>
             </div>
 
