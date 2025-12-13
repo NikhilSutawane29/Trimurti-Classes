@@ -77,7 +77,7 @@ const SuccessStoriesPage = () => {
                 <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
                   <div className="flex items-center text-gray-500 dark:text-gray-400">
                     <Award className="w-5 h-5 mr-2" />
-                    <span>CBSE Board: 98.6%</span>
+                    <span>GSEB Board: 85.6%</span>
                   </div>
                   <div className="flex items-center text-gray-500 dark:text-gray-400 mt-2">
                     <GraduationCap className="w-5 h-5 mr-2" />
@@ -120,7 +120,7 @@ const SuccessStoriesPage = () => {
                 <div className="border-t border-gray-200 dark:border-gray-600 pt-4">
                   <div className="flex items-center text-gray-500 dark:text-gray-400">
                     <Award className="w-5 h-5 mr-2" />
-                    <span>Gujarat Board: 97.8%</span>
+                    <span>Gujarat Board: 90.8%</span>
                   </div>
                   <div className="flex items-center text-gray-500 dark:text-gray-400 mt-2">
                     <GraduationCap className="w-5 h-5 mr-2" />
@@ -152,7 +152,7 @@ const SuccessStoriesPage = () => {
                   </div>
                 </div>
                 <p className="text-brand-blue-600 dark:text-brand-blue-400 font-medium mb-3">
-                  Gujarat Board Topper - 99.6% in Mathematics
+                  Gujarat Board Topper - 90.6% in Mathematics
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   "The comprehensive subject coverage and regular practice tests
@@ -198,7 +198,7 @@ const SuccessStoriesPage = () => {
               <p className="text-blue-100">School Toppers & 90%+ Scorers</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-white mb-2">15+</div>
+              <div className="text-4xl font-bold text-white mb-2">20+</div>
               <p className="text-blue-100">Years of Excellence</p>
             </div>
           </div>
@@ -394,46 +394,46 @@ const SuccessStoriesPage = () => {
 // Sample data for board toppers
 const boardToppers = [
   {
-    name: "Ankit Sharma",
+    name: "Bhargavi Panchal",
     year: "2023",
-    board: "CBSE",
-    score: "98.6%",
-    current: "IIT Delhi - Engineering",
+    board: "GSEB",
+    score: "85.6%",
+    current: "NIRMA - Architecture Engineering",
   },
   {
     name: "Priya Patel",
     year: "2023",
     board: "Gujarat Board",
-    score: "99.2%",
-    current: "AIIMS - Medical",
+    score: "90.2%",
+    current: "MS University",
   },
   {
     name: "Rahul Mehta",
     year: "2022",
     board: "CBSE",
-    score: "97.8%",
-    current: "NIT Surat - Engineering",
+    score: "89.8%",
+    current: "Surat - Engineering",
   },
   {
     name: "Neha Singh",
     year: "2022",
     board: "CBSE",
-    score: "98.2%",
-    current: "IIT Bombay - Engineering",
+    score: "86.2%",
+    current: "Bharuch - Engineering",
   },
   {
     name: "Karan Joshi",
     year: "2021",
     board: "Gujarat Board",
-    score: "97.5%",
-    current: "IIM Ahmedabad - BBA",
+    score: "91.5%",
+    current: "Ahmedabad College - BBA",
   },
   {
     name: "Sneha Patel",
     year: "2021",
-    board: "CBSE",
-    score: "99.0%",
-    current: "AIIMS Delhi - Medical",
+    board: "GSEB",
+    score: "90.0%",
+    current: "Surat - BCOM",
   },
 ];
 
@@ -442,35 +442,35 @@ const testimonials = [
   {
     name: "Arjun Singh",
     initials: "AS",
-    info: "Class 12, CBSE (96.5%)",
+    info: "Class 12, GSEB (92.5%)",
     quote:
       "The teaching methodology at Trimurti Classes made complex mathematical concepts easy to understand. The regular tests and personalized feedback helped me improve consistently.",
   },
   {
     name: "Meera Shah",
     initials: "MS",
-    info: "Class 12, Gujarat Board (98.6%)",
+    info: "Class 12, Gujarat Board (90.6%)",
     quote:
       "The faculty at Trimurti Classes is exceptional. They not only focus on academic excellence but also instill discipline and proper study habits which are essential for board exams and overall development.",
   },
   {
     name: "Rohan Desai",
     initials: "RD",
-    info: "Class 10, Gujarat Board (99%)",
+    info: "Class 10, Gujarat Board (84%)",
     quote:
       "I was struggling with mathematics before joining Trimurti Classes. The step-by-step approach and clear explanation of fundamentals helped me overcome my fear of the subject.",
   },
   {
     name: "Nisha Kumar",
     initials: "NK",
-    info: "Class 12, CBSE Board (97.2%)",
+    info: "Class 12, GSEB Board (85.2%)",
     quote:
       "The rigorous practice and regular mock tests at Trimurti Classes prepared me well for board exams. The strong foundation in mathematics helped me excel in science subjects too.",
   },
   {
     name: "Vikram Patel",
     initials: "VP",
-    info: "Class 12, CBSE (98.2%)",
+    info: "Class 12, GSEB (78.2%)",
     quote:
       "What sets Trimurti Classes apart is the individual attention given to each student. My weak areas were identified and addressed effectively, which significantly improved my performance.",
   },

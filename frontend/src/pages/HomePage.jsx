@@ -137,7 +137,7 @@ const HomePage = () => {
                     Start your day with focused learning
                   </p>
                   <p className="text-lg font-medium text-brand-blue-800 dark:text-blue-300">
-                    8:00 AM to 11:00 AM
+                    7:00 AM to 11:00 AM
                   </p>
                   <p className="mt-4 text-gray-600 dark:text-gray-400">
                     Perfect for early risers who prefer to study with a fresh
@@ -164,7 +164,7 @@ const HomePage = () => {
                     Intensive after-school learning
                   </p>
                   <p className="text-lg font-medium text-brand-blue-800 dark:text-blue-300">
-                    4:00 PM to 8:00 PM
+                    3:00 PM to 8:00 PM
                   </p>
                   <p className="mt-4 text-gray-600 dark:text-gray-400">
                     Ideal for students attending regular school in the morning.
@@ -320,7 +320,7 @@ const HomePage = () => {
               </h3>
               <div className="mb-6 space-y-4 text-gray-600 dark:text-gray-300">
                 <p>
-                  With over 15 years of teaching experience, Mr. Shailesh
+                  With over 20 years of teaching experience, Mr. Shailesh
                   Sutawane is a dedicated educator committed to bringing out the
                   best in every student.
                 </p>
@@ -344,7 +344,7 @@ const HomePage = () => {
                     className="text-brand-blue-800 dark:text-blue-400 mr-2"
                   />
                   <span className="text-gray-700 dark:text-gray-300">
-                    15+ Years Experience
+                    20+ Years Experience
                   </span>
                 </div>
                 <div className="flex items-center bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full">
@@ -362,7 +362,7 @@ const HomePage = () => {
                     className="text-brand-blue-800 dark:text-blue-400 mr-2"
                   />
                   <span className="text-gray-700 dark:text-gray-300">
-                    1000+ Students Guided
+                    500+ Students Guided
                   </span>
                 </div>
               </div>
